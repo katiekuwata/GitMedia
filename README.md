@@ -38,11 +38,52 @@ Go either in ~/.gitconfig (for global settings) or in clone/.git/config (for per
         smudge = git-media filter-smudge
     [git-media]
         transport = local
-        localpath = <Local Path>
+        localpath = /Documents/MyLocalRepoPath
 
 One time
 
     $ echo “*.mov filter=media -crlf” > .gitattributes
 
+Try out
+-------
+Add robot.png
 
+    $ GitMedia [master]$ git status
+    # On branch master
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #	robot.png
+    nothing added to commit but untracked files present (use "git add" to track)
+    
+    $ GitMedia [master]$ git media status
+    == Expanded Media ==
+       (417k)   lion.png
+
+    $ GitMedia [master]$ git add robot.png
+    Saving media : b9d4020b63951a614f81c883b2fb9918892d5cfb : 0.003978
+
+    $ GitMedia [master]$ git commit -m "Added robot.png"
+    [master 827c3b0] Added robot.png
+    Saving media : b9d4020b63951a614f81c883b2fb9918892d5cfb : 0.004152
+     1 files changed, 1 insertions(+), 0 deletions(-)
+     create mode 100644 robot.png
+
+    $ GitMedia [master]$ git media status
+    == Expanded Media ==
+       (417k)   lion.png
+       (415k)   robot.png
+
+    == Unpushed Media ==
+       (415k)   b9d4020b
+
+    $ GitMedia [master]$ git media sync
+    uploading b9d4020b
+
+    $ GitMedia [master]$ ll /Documents/MyLocalRepoPath
+    -rw-------  1   427384 Aug 20 12:06 f13fba2af641db2ccf987e31938b2c033017fbe7
+    -rw-------  1   425535 Aug 20 12:25 b9d4020b63951a614f81c883b2fb9918892d5cfb
+
+    $ GitMedia [master]$ git push origin 
+    
 
