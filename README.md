@@ -86,4 +86,50 @@ Add robot.png
 
     $ GitMedia [master]$ git push origin 
     
+Clone the repo
+
+clone from github
+
+    $ git clone https://github.com/katiekuwata/GitMedia.git GitMediaClone
+
+    $ GitMediaClone [master]$ ll
+        -rw-rw-r--   1    41 Aug 20 12:28 robot.png
+	    -rw-rw-r--   1    41 Aug 20 12:28 lion.png
+	    -rw-rw-r--   1    53 Aug 20 12:28 README.md
+	    -rw-rw-r--   1    11 Aug 20 12:28 .gitignore
+	    -rw-rw-r--   1    25 Aug 20 12:28 .gitattributes
+	    drwxrwxr-x  13   442 Aug 20 12:28 .git
+
+    $ GitMediaClone [master]$ more robot.png  <--------- sha file
+    b9d4020b63951a614f81c883b2fb9918892d5cfb
+	
+    $ GitMediaClone [master]$ more lion.png   <--------- sha file
+    f13fba2af641db2ccf987e31938b2c033017fbe7
+	
+since I setup .git/config locally I need to do this here too
+
+    GitMediaClone [master]$ git config filter.media.smudge "git-media filter-smudge"
+    GitMediaClone [master]$ git config filter.media.clean "git-media filter-clean"
+    GitMediaClone [master]$ git config git-media.transport "local"
+    GitMediaClone [master]$ git config git-media.localpath "/Users/kkuwata/Documents/github/GitMediaFiles"
+
+    GitMediaClone [master]$ git media status
+       == Unexpanded Media ==
+       f13fba2a lion.png
+       b9d4020b robot.png
+
+    GitMediaClone [master]$ git media sync <----------- synced!
+    	Downloading f13fba2a : lion.png
+    	Expanding  f13fba2a : lion.png
+    	Downloading b9d4020b : robot.png
+    	Expanding  b9d4020b : robot.png
+
+    GitMediaClone [master]$ ll
+    	total 1696
+    	-rw-rw-r--   1      53 Aug 20 12:28 README.md
+    	-rw-rw-r--   1      11 Aug 20 12:28 .gitignore
+    	-rw-rw-r--   1      25 Aug 20 12:28 .gitattributes
+    	drwxrwxr-x  14     476 Aug 20 12:37 .git
+    	-rw-rw-r--   1  425535 Aug 20 12:38 robot.png <---------- real file
+    	-rw-rw-r--   1  427384 Aug 20 12:38 lion.png <---------- real file
 
