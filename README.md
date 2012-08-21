@@ -46,7 +46,7 @@ One time
 
 Try out
 -------
-Add robot.png
+Add robot.png and add/commit/push to github and upload media file to media repository
 
     $ GitMedia [master]$ git status
     # On branch master
@@ -86,9 +86,7 @@ Add robot.png
 
     $ GitMedia [master]$ git push origin 
     
-Clone the repo
-
-clone from github
+Clone the repository from github and download media files from the media repository
 
     $ git clone https://github.com/katiekuwata/GitMedia.git GitMediaClone
 
@@ -106,7 +104,7 @@ clone from github
     $ GitMediaClone [master]$ more lion.png   <--------- sha file
     f13fba2af641db2ccf987e31938b2c033017fbe7
 	
-since I setup .git/config locally I need to do this here too
+Since I setup .git/config locally I need to do this here too
 
     GitMediaClone [master]$ git config filter.media.smudge "git-media filter-smudge"
     GitMediaClone [master]$ git config filter.media.clean "git-media filter-clean"
@@ -132,4 +130,100 @@ since I setup .git/config locally I need to do this here too
     	drwxrwxr-x  14     476 Aug 20 12:37 .git
     	-rw-rw-r--   1  425535 Aug 20 12:38 robot.png <---------- real file
     	-rw-rw-r--   1  427384 Aug 20 12:38 lion.png <---------- real file
+
+Media files and commit
+----------------------
+    $ GitMedia [master]$ git media status
+    == Expanded Media ==
+       (417k)   lion.png
+       (415k)   robot.png
+
+    == Already Pushed Media ==
+       (415k)   b9d4020b
+
+    $ GitMedia [master]$ git status
+    # On branch master
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   lion.png
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    $ GitMedia [master]$ git add .
+    Saving media : e46cc216d91370377254cdb677c31554d6a64aca : 0.004112
+
+    $ GitMedia [master]$ git commit -m "Added annotation #1"
+    [master Saving media : e46cc216d91370377254cdb677c31554d6a64aca : 0.004207
+    8572e93] Added annotation #1
+    Saving media : e46cc216d91370377254cdb677c31554d6a64aca : 0.004179
+     1 files changed, 1 insertions(+), 1 deletions(-)
+
+    $ GitMedia [master]$ 2012-08-20 17:42:21.896 GitX[90387:c337] Loaded 9 commits in 0.008862 seconds (1015.569976/sec)
+
+    $ GitMedia [master]$ git status
+    # On branch master
+    # Your branch is ahead of 'origin/master' by 1 commit.
+    #
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   lion.png
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    $ GitMedia [master]$ git add .
+    Saving media : d55a612d68258b93e4ccded1cd04c509a8cc0be1 : 0.004242
+
+    $ GitMedia [master]$ git commit -m "Added annotation #2"
+    [master Saving media : d55a612d68258b93e4ccded1cd04c509a8cc0be1 : 0.004149
+    4bc115e] Added annotation #2
+    Saving media : d55a612d68258b93e4ccded1cd04c509a8cc0be1 : 0.004289
+     1 files changed, 1 insertions(+), 1 deletions(-)
+
+    $ GitMedia [master]$ git status
+    # On branch master
+    # Your branch is ahead of 'origin/master' by 2 commits.
+    #
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #	modified:   lion.png
+    #
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+    $ GitMedia [master]$ git add .
+    Saving media : 9cdd83c1ba83761a289f64dcf555f4b7a9287df7 : 0.004066
+
+    $ GitMedia [master]$ git commit -m "Added annotation #2"
+    [master Saving media : 9cdd83c1ba83761a289f64dcf555f4b7a9287df7 : 0.004163
+    6c61e57] Added annotation #2
+    Saving media : 9cdd83c1ba83761a289f64dcf555f4b7a9287df7 : 0.004186
+     1 files changed, 1 insertions(+), 1 deletions(-)
+
+    $ GitMedia [master]$ git commit --amend
+    Saving media : 9cdd83c1ba83761a289f64dcf555f4b7a9287df7 : 0.004151
+    [master Saving media : 9cdd83c1ba83761a289f64dcf555f4b7a9287df7 : 0.004124
+    8771bb8] Added annotation #3
+    Saving media : 9cdd83c1ba83761a289f64dcf555f4b7a9287df7 : 0.004419
+     1 files changed, 1 insertions(+), 1 deletions(-)
+
+    $ GitMedia [master]$ ll ../GitMediaFiles/
+    -rw-------   1   427384 Aug 20 12:06 f13fba2af641db2ccf987e31938b2c033017fbe7
+    -rw-------   1   425535 Aug 20 12:25 b9d4020b63951a614f81c883b2fb9918892d5cfb
+
+    $ GitMedia [master]$ git media sync
+    uploading 9cdd83c1
+    uploading d55a612d
+    uploading e46cc216
+
+    $ GitMedia [master]$ ll ../GitMediaFiles/
+    -rw-------   1   427384 Aug 20 12:06 f13fba2af641db2ccf987e31938b2c033017fbe7
+    -rw-------   1   425535 Aug 20 12:25 b9d4020b63951a614f81c883b2fb9918892d5cfb
+    -rw-------   1   427579 Aug 20 17:45 e46cc216d91370377254cdb677c31554d6a64aca
+    -rw-------   1   427678 Aug 20 17:45 d55a612d68258b93e4ccded1cd04c509a8cc0be1
+    -rw-------   1   427713 Aug 20 17:45 9cdd83c1ba83761a289f64dcf555f4b7a9287df7
 
