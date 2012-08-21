@@ -111,7 +111,7 @@ since I setup .git/config locally I need to do this here too
     GitMediaClone [master]$ git config filter.media.smudge "git-media filter-smudge"
     GitMediaClone [master]$ git config filter.media.clean "git-media filter-clean"
     GitMediaClone [master]$ git config git-media.transport "local"
-    GitMediaClone [master]$ git config git-media.localpath "/Users/kkuwata/Documents/github/GitMediaFiles"
+    GitMediaClone [master]$ git config git-media.localpath "/Documents/MyLocalRepoPath"
 
     GitMediaClone [master]$ git media status
        == Unexpanded Media ==
