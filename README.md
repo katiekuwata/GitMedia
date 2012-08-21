@@ -42,7 +42,7 @@ Go either in ~/.gitconfig (for global settings) or in clone/.git/config (for per
 
 One time
 
-    $ echo “*.mov filter=media -crlf” > .gitattributes
+    $ echo "*.png filter=media -crlf" > .gitattributes
 
 Try out
 -------
