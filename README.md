@@ -20,29 +20,28 @@ Configuration
 -------------
 Go either in ~/.gitconfig (for global settings) or in clone/.git/config (for per-repo settings).
 
+    $ GitMedia [master]$ git config filter.media.smudge "git-media filter-smudge"
+    $ GitMedia [master]$ git config filter.media.clean "git-media filter-clean"
+    $ GitMedia [master]$ git config --global git-media.transport "local"
+    $ GitMedia [master]$ git config --global git-media.localpath "/Documents/MyLocalRepoPath"
+
     $ GitMedia/.git [master]$ more config 
-    [core]
-        repositoryformatversion = 0
-        filemode = true
-        bare = false
-        logallrefupdates = true
-        ignorecase = true
-    [remote "origin"]
-        fetch = +refs/heads/*:refs/remotes/origin/*
-        url = https://github.com/katiekuwata/GitMedia.git
-    [branch "master"]
-        remote = origin
-        merge = refs/heads/master
+    <snip>
     [filter "media"]
         clean = git-media filter-clean
         smudge = git-media filter-smudge
+    <snip>
+   
+    $ GitMedia/.git [master]$ more ~/.gitconfig 
+    <snip>
     [git-media]
         transport = local
         localpath = /Documents/MyLocalRepoPath
+    <snip>
+   
+Setup the .gitattributes file to map extensions to the filter. We are going to filter *.png file in this example. Do once
 
-One time
-
-    $ echo "*.png filter=media -crlf" > .gitattributes
+    $ GitMedia [master]$ echo "*.png filter=media -crlf" > .gitattributes
 
 Try out
 -------
